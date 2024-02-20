@@ -1,0 +1,253 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>ASSAM FLOOD</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Skote is a fully featured premium admin dashboard template built on top of awesome Bootstrap 4.4.1" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+
+		<!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+		<!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+		
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+
+    </head>
+    {% if request.user.is_requestadmin %}
+    <body data-sidebar="dark">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            <header id="page-topbar">
+                <div class="navbar-header">
+                    <div class="d-flex">
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box">
+
+                            <a href="index.html" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="assets/images/velocity_logo.png" alt="" height="40">
+                                </span>
+                                <span class="logo-lg">
+                                    <img src="assets/images/velocity_logo.png" alt="" height="">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex pr-2">
+						<div class="dropdown d-inline-block">
+                            <span class="d-none d-xl-inline-block ml-1" key="t-henry">Welcome {{request.user.firstname}}</span>&nbsp;&nbsp;
+                            <a class="" href="{% url 'logout' %}">Logout</span></a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="vertical-menu">
+
+                <div data-simplebar class="h-100">
+
+                    <!--- Sidemenu -->
+                    <div id="sidebar-menu">
+                        <!-- Left Menu Start -->
+                        <ul class="metismenu list-unstyled" id="side-menu">
+                            <li>
+                                <a href="{% url 'home' %}" class="waves-effect">
+                                    <i class="mdi mdi-file-document-box-outline"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- <a href="{vendors.html}" class="waves-effect">
+                                    <i class="mdi mdi-receipt"></i>
+                                    <span>Vendors</span>
+                                </a> -->
+                            </li>
+                            <li>
+                                <a href="{% url 'rfp' %}" class="waves-effect">
+                                    <i class="mdi mdi-flip-vertical"></i>
+                                    <span>RFP Lists</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="users.html" class="waves-effect">
+                                    <i class="mdi mdi-apps"></i>
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'categories' %}" class="waves-effect">
+                                    <i class="mdi mdi-weather-night"></i>
+                                    <span>Categories</span>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <!-- Sidebar -->
+                </div>
+            </div>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">Vendors List</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
+                                            <li class="breadcrumb-item active">Vendors</li>
+                                        </ol>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+
+                        <!-- end row -->
+						
+						
+						<div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        
+										<div class="TableHeader">
+											<div class="row">
+												<div class="col-lg-3">
+													<h4 class="card-title">Vendors</h4>
+												</div>
+											</div>
+										</div>	
+                                        <div class="table-responsive">
+                                            <table class="table mb-0 listingData dt-responsive" id="datatable">
+                                                <thead>
+                                                    <tr>
+                                                        
+                                                        <th>First name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Email</th>
+                                                        <th>Categories</th>
+                                                        <th>Contact No</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for vendor in vendors %}
+                                                    <ol>
+                                                    <tr>
+                                                        <td>{{vendor.firstname}}</td>
+                                                        <td>{{vendor.lastname}}</td>
+                                                        <td>{{vendor.email}}</td>
+                                                        <td>{{vendor.category.all|join:', '}} </td>
+                                                        <td>{{vendor.mobile}}</td>
+                                                        {% if vendor.active_status %}
+                                                        <td><span class="badge badge-pill badge-success">Approved</span></td>
+                                                        <td>
+															
+															<a href="{% url 'remove-vendor' vendor.id %}" class="text-danger"><i class="mdi mdi-circle-off-outline"></i></a>
+														</td>
+                                                        {% else %}
+                                                        <td><span class="badge badge-pill badge-danger">Disapproved</span></td>
+                                                        <td>
+															<a class="text-success" href="{% url 'approve-vendor' vendor.id %}">Approve</a>
+															<a href="{% url 'remove-vendor' vendor.id %}" class="text-danger"><i class="mdi mdi-circle-off-outline"></i></a>
+														</td>
+                                                        {% endif %}
+                                                        
+                                                    </tr>
+                                                    </ol>
+                                                    {% endfor %}
+													
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                        <div class="row pt-3">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7 dataTables_wrapper ">
+                                                <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                                                    <ul class="pagination">
+                                                        <li class="paginate_button page-item previous disabled" id="datatable_previous">
+                                                            <a href="#" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item active"><a href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                                        <li class="paginate_button page-item next disabled" id="datatable_next"><a href="#" aria-controls="datatable" data-dt-idx="2" tabindex="0" class="page-link">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                        <!-- end row -->
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                2022 &copy; Copyright.
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-right d-none d-sm-block">
+                                    Support Email:<a href="#" target="_blank" class="text-muted"> support@velsof.com </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+      
+
+    </body>
+    {% endif %}
+</html>

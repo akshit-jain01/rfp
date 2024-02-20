@@ -1,0 +1,11 @@
+{
+    "builds": [{
+        "src": "rfp2/wsgi.py",
+        "use": "@ardnt/vercel-python-wsgi",
+        "config": { "maxLambdaSize": "15mb" }
+    }],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "rfp2/wsgi.py"
+    }]
+}
