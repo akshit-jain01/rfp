@@ -171,9 +171,11 @@
                                                             <td>{{category.name}}</td>
                                                             {% if category.active_status %}
                                                             <td><span class="badge badge-pill badge-success">Active</span></td>
+                                                            <a href="{% url 'categoryrequests' category.id %}">rfp</a>
                                                             {% else %}
                                                             <td><span class="badge badge-pill badge-danger">Inactive</span></td>
                                                             {% endif %}
+                                                            
                                                     </tr>
                                                     {% endfor %}
                                                     

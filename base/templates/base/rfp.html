@@ -51,7 +51,7 @@
 
                     <div class="d-flex pr-2">
 						<div class="dropdown d-inline-block">
-                            <span class="d-none d-xl-inline-block ml-1" key="t-henry">Welcome {{request.user}}</span>&nbsp;&nbsp;
+                            <span class="d-none d-xl-inline-block ml-1" key="t-henry">Welcome {{request.user.firstname}}</span>&nbsp;&nbsp;
                             <a class="" href="{% url 'logout' %}">Logout</span></a>
                         </div>
                     </div>
@@ -171,11 +171,12 @@
                                                         <td>
 															
 															<a href="{% url 'remove-rfp' rfp.id %}" class="text-danger"><i class="mdi mdi-circle-off-outline"></i></a>
+                                                            <td><a href="{% url 'getquotes' rfp.id %}">Quotes</a></td>
 														</td>
                                                         {% else %}
                                                         <td><span class="badge badge-pill badge-danger">Closed</span></td>
                                                         {% endif %}
-                                                        <td><a href="{% url 'getquotes' rfp.id %}">Quotes</a></td>
+                                                        
                                                         
                                                     </tr>
                                                     {% endfor %}

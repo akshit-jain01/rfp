@@ -3,7 +3,7 @@ from django.urls import path
 
 from django.contrib.auth import views as auth_views
 
-from .views import LoginView, RegisterView, HomeView, LogoutView, RFPView, VendorView, AddRFPView, CategoryView, RemoveVendorView, AddCategoryView, ApproveVendorView, RemoveRFPView, ApplyRFPView, GetQuotesView, VendorQuotesView, RegisterAdminView
+from .views import LoginView, RegisterView, HomeView, LogoutView, RFPView, VendorView, AddRFPView, CategoryView, RemoveVendorView, AddCategoryView, ApproveVendorView, RemoveRFPView, ApplyRFPView, GetQuotesView, VendorQuotesView, RegisterAdminView, GetCategoryRequestsView
 
 urlpatterns = [
     # path('', AdminRegisterView, name='admin-login'),
@@ -30,6 +30,7 @@ urlpatterns = [
 
     path('getcategories/', CategoryView, name='categories'),
     path('addcategory/', AddCategoryView, name='add-category'),
+    path('getcategoryrequests/<int:pk>', GetCategoryRequestsView, name='categoryrequests'),
 
     path('applyrfp/<int:pk>', ApplyRFPView, name='apply-rfp'),
 

@@ -241,3 +241,15 @@ def VendorQuotesView(request):
     context = {'quotes':vendor_quotes}
 
     return render(request, 'base/getquotes.html', context)
+
+def GetCategoryRequestsView(request, pk):
+
+    category = Category.objects.get(id=pk)
+
+    rfp = category.category.all()
+
+    # category_requests = category.category_set.all()
+
+    context = {'rfps':rfp}
+
+    return render(request, 'base/rfp.html', context)
