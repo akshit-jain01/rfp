@@ -164,6 +164,7 @@
                                                 </thead>
                                                 <tbody>
                                                     {% for vendor in vendors %}
+                                                    {% if not vendor.is_requestadmin %}
                                                     <ol>
                                                     <tr>
                                                         <td>{{vendor.firstname}}</td>
@@ -187,6 +188,7 @@
                                                         
                                                     </tr>
                                                     </ol>
+                                                    {% endif %}
                                                     {% endfor %}
 													
                                                 </tbody>

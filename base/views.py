@@ -24,7 +24,8 @@ def LoginView(request):
         try:
             user = Vendor.objects.get(email=email)
             if user.active_status == False:
-                return messages.error(request,'vendor not approved')
+                messages.error(request,'vendor not approved')
+                return redirect('login')
         except:
             messages.error(request, 'User doesn\'t exist' )
 
@@ -67,6 +68,45 @@ def RegisterView(request):
         
         
     return render(request, 'base/register.html', {'form':form})
+
+def RegisterAdminView(request):
+
+    
+    if request.method == 'POST':
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        email=request.POST['email']
+
+
+        
+        if Vendor.objects.filter(email=email).exists():
+            messages.error(request,"user with this email already exists")
+            return redirect('registeradmin')
+        
+        if password != password2:
+            messages.error(request,"passwordds don\'t match")
+            return redirect('registeradmin')
+        
+        requestadmin = Vendor.objects.create(
+            email=email,
+            firstname = firstname,
+            lastname = lastname,
+            no_of_employees = 0,
+            revenue = 0,
+            pancard_no = 0,
+            gst_no = 0,
+            mobile = 0)
+        
+        requestadmin.set_password(password)
+        requestadmin.is_active = True
+        requestadmin.is_requestadmin = True
+        requestadmin.active_status = True
+        requestadmin.save()
+        return redirect('login')
+    
+    return render(request, 'base/registeradmin.html')
 
 def ApproveVendorView(request, pk):
     vendor = Vendor.objects.get(id=pk)

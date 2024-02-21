@@ -3,13 +3,14 @@ from django.urls import path
 
 from django.contrib.auth import views as auth_views
 
-from .views import LoginView, RegisterView, HomeView, LogoutView, RFPView, VendorView, AddRFPView, CategoryView, RemoveVendorView, AddCategoryView, ApproveVendorView, RemoveRFPView, ApplyRFPView, GetQuotesView, VendorQuotesView
+from .views import LoginView, RegisterView, HomeView, LogoutView, RFPView, VendorView, AddRFPView, CategoryView, RemoveVendorView, AddCategoryView, ApproveVendorView, RemoveRFPView, ApplyRFPView, GetQuotesView, VendorQuotesView, RegisterAdminView
 
 urlpatterns = [
     # path('', AdminRegisterView, name='admin-login'),
     path('', LoginView, name='login'),
     path('logout/', LogoutView, name='logout'),
     path('registervendor/', RegisterView, name='register'),
+    path('registeradmin/', RegisterAdminView, name='registeradmin'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='base/password_reset_form.html'), name='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='base/password_reset_done.html'), name='password_reset_done'),
